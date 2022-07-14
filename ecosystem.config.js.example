@@ -5,8 +5,11 @@ module.exports = {
     max_restarts: 2,
     env: {
       "NODE_ENV": "development",
-      "PORT": "80",
+      "PORT": "8000",
       "IP": "localhost",
+      "application": "CoinClicker_Backend",
+      "BehindProxy": "1",
+      "LOG_LEVEL": "3",
       "Clicks_Per_Coin": "1",
       "Max_Coins_Per_Day_Per_User": "100",
     },

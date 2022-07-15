@@ -140,19 +140,6 @@
     clearTimeout(typingTimer);
   });
 
-  if (localStorage.getItem("email") != null) {
-    $input.val(localStorage.getItem("email"));
-  } else {
-    SnackBar({
-      message: `${translate("Startup.Welcome")}`,
-      width: "600px",
-      speed: SnackBox_Timeout,
-      position: SnackBox_Location,
-      fixed: true,
-      status: "info",
-    });
-  }
-
   function doneTyping() {
     const email = document.getElementById("UserToGiveCoins").value;
     posting = $.ajax({

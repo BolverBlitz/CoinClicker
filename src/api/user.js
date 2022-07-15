@@ -47,7 +47,7 @@ router.get("/", limiter, async (reg, res, next) => {
             }
         }
     } catch (error) {
-        log.error(error);
+        log.error("Some error in users plugin: " + error);
         next(error);
     }
 });

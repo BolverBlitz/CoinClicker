@@ -1,5 +1,5 @@
 const express = require('express');
-const { GetUsers } = require('../../lib/controlpanel_api');
+const { GetUsers, IncrementUser } = require('../../lib/controlpanel_api');
 const { log } = require('../../lib/logger');
 const ButtonCache = require('js-object-cache')
 
@@ -12,6 +12,28 @@ const PluginRequirements = [];
 const PluginVersion = '0.0.1';
 const PluginAuthor = 'BolverBlitz';
 const PluginDocs = '';
+
+//This will add pending credits to the user automaticly.
+setInterval(() => {
+    const Cached_Emails = ButtonCache.keys(); //Get all the emails in the cache
+    for (let i = 0; i < Cached_Emails.length; i++) { //Go through all the users
+        const Email_User = ButtonCache.get(Cached_Emails[i]); //Get cache data from user
+        if (Email_User.new_coins > 0) { //check if a user has pending credits
+            GetUsers('email', Cached_Emails[i]).then(users => { //Get the user from the controlpanel
+                IncrementUser(users[0].id, Email_User.new_coins, 0).then(updated => {
+                    Email_User.coins_today = Email_User.coins_today + Email_User.new_coins; //Set credits today
+                    log.info(`Added ${Email_User.new_coins} creadits to ${Cached_Emails[i]}`);
+                    Email_User.new_coins = 0; //remove pending credits
+                    ButtonCache.set(Cached_Emails[i], Email_User);
+                }).catch(error => {
+                    log.error("Pending credits addition: " + error);
+                });
+            }).catch(error => {
+                log.error("Getting user from dashboard: " + error);
+            });
+        }
+    }
+}, 60000);
 
 const router = express.Router();
 

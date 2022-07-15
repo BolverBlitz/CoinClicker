@@ -1,5 +1,5 @@
 const i18n = new I18n({
-    fallback: 'de',
+    fallback: 'en',
     languages: {
         de: {
             Startup: {
@@ -24,6 +24,33 @@ const i18n = new I18n({
                 410: 'Das Dokument wurde nicht gefunden',
                 429: 'Zu viele Anfragen',
                 500: 'Interner Server Fehler',
+                503: 'Service nicht verfügbar',
+                504: 'Gateway Timeout',
+            }
+        },
+        en: {
+            Startup: {
+                Welcome: 'Please enter your E-Mail Address',
+                UserFound: 'Your Account was found',
+            },
+            TextBox: {
+                CoinStats: 'Possible Coins today: ',
+                KlickStats: 'Today\'s Clicks: ',
+            },
+            WS:{
+                Connected: 'Connected to Server',
+                LostConError: 'Lost Connection to Server',
+                UnknownError: 'Unknown Error with Server Connection...',
+                Reached_Day_limit: 'You have reached the maximum amount of Coins for today',
+            },
+            Error: {
+                400: 'Bad Request',
+                401: 'Unauthorized Access',
+                403: 'Access Denied',
+                404: 'User not found',
+                410: 'Document not found',
+                429: 'Too many requests',
+                500: 'Internal Server Error',
                 503: 'Service Unavailable',
                 504: 'Gateway Timeout',
             }

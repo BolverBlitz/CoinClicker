@@ -8,6 +8,7 @@ module.exports = {
       "PORT": "8000",
       "IP": "localhost",
       "application": "CoinClicker_Backend",
+      "controlpanel_url": "http://localhost/",
       "controlpanel_api_key": "",
       "BehindProxy": "1",
       "LOG_LEVEL": "3",

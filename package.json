@@ -32,6 +32,7 @@
     "joi": "^17.6.0",
     "js-object-cache": "^0.0.1",
     "morgan": "^1.10.0",
+    "node-fetch": "^2.6.1",
     "pm2-ctl": "^0.0.2",
     "rotating-file-stream": "^3.0.4"
   }

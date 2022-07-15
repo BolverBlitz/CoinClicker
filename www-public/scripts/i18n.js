@@ -2,7 +2,20 @@ const i18n = new I18n({
     fallback: 'de',
     languages: {
         de: {
-
+            Startup: {
+                Welcome: 'Bitte gib deine E-Mail Adresse deines Accounts ein',
+                UserFound: 'Dein Account wurde gefunden',
+            },
+            Error: {
+                400: 'Fehlerhafte Anfrage',
+                401: 'Nicht autorisierter Zugriff',
+                403: 'Zugriff verweigert',
+                410: 'Das Dokument wurde nicht gefunden',
+                429: 'Zu viele Anfragen',
+                500: 'Interner Server Fehler',
+                503: 'Service Unavailable',
+                504: 'Gateway Timeout',
+            }
         },
     }
 });

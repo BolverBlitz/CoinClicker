@@ -55,6 +55,33 @@ const i18n = new I18n({
                 504: 'Gateway Timeout',
             }
         },
+        it: {
+            Startup: {
+                Welcome: 'Per favore inserisci la tua E-Mail',
+                UserFound: 'Il tuo Account è stato trovato',
+            },
+            TextBox: {
+                CoinStats: 'Coins possibili oggi: ',
+                KlickStats: 'Clicchi oggi: ',
+            },
+            WS:{
+                Connected: 'Connesso al Server',
+                LostConError: 'Connessione al Server persa',
+                UnknownError: 'Errore sconosciuto con il Server',
+                Reached_Day_limit: 'Hai raggiunto il massimo numero di Coins per oggi',
+            },
+            Error: {
+                400: 'Richiesta non valida',
+                401: 'Accesso non autorizzato',
+                403: 'Accesso negato',
+                404: 'Account non trovato',
+                410: 'Documento non trovato',
+                429: 'Troppi richieste',
+                500: 'Errore interno del server',
+                503: 'Servizio non disponibile',
+                504: 'Timeout del Gateway',
+            }
+        }
     }
 });
 

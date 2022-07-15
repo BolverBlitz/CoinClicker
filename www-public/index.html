@@ -33,33 +33,49 @@
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: space-evenly;
-        align-items: center;
         align-content: center;
         justify-content: center;
         align-items: center;
         background-color: #24282f;
       }
 
-      .flexbox-item {
-       flex: 0 1 auto;
+      .contianer {
+        display: flex;
+        margin: 100px;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-evenly;
       }
 
-      .flex-item:nth-child(1) {
-          flex-grow: 0;
-          flex-shrink: 1;
-          flex-basis: auto;
+      .elements {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 600px;
+        align-items: center;
+        justify-content: space-evenly;
       }
 
-      .flex-item:nth-child(2) {
-          flex-grow: 0;
-          flex-shrink: 1;
-          flex-basis: auto;
+      .elements > div {
+        flex: 1 1 auto;
+        text-align: center;
+
+        margin-bottom: 25px;
       }
 
-      .flex-item:nth-child(3) {
-          flex-grow: 0;
-          flex-shrink: 1;
-          flex-basis: auto;
+      .textbox {
+        padding: 8px;
+        font-size: 24px;
+        border-width: 0px;
+        border-color: #fdfdfd;
+        background-color: #24282f;
+        margin-bottom: 12%;
+        color: #000000;
+        border-style: solid;
+        border-radius: 11px;
+        box-shadow: 0px 0px 5px rgba(244,44,44,.75);
+        text-shadow: -1px 0px 0px rgba(66,66,66,.0);
       }
 
       /* Button */
@@ -119,15 +135,19 @@
   </head>
 
   <body>
-    <div class="body.flex-item">
-      Stuff
-    </div>
-    <div class="body.flex-item">
-      <button id="CoinButton" type="button">
+    <div class="contianer">
+      <div class="elements">
+        <div class="textbox">
+          <div id="CoinStats" style="color: #fdfdfd;"></div>
+          <div id="KlickStats" style="color: #fdfdfd;"></div>
+        </div>
+      </div>
+      <div class="flex-items">
+        <button id="CoinButton" type="button">
         Coins!<input type="text" id="UserToGiveCoins" placeholder="E-Mail" />
       </button>
-      <!-- <input type="text" id="UserToBan" placeholder="Username"> -->
     </div>
+   </div>
   </body>
 </html>
 
@@ -138,6 +158,8 @@
   let isLocked = true;
 
   let click_timeout = 0;
+  let maxcoins = 0;
+  let Clicks_Per_Coin = 0;
 
   const SnackBox_Timeout = 400;
   const SnackBox_Location = "tr";
@@ -146,6 +168,10 @@
   const baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
   let webSocket;
+
+  /* Set default text */
+  $("#CoinStats").html(`${translate("TextBox.CoinStats")} ?/?`);
+  $("#KlickStats").html(`${translate("TextBox.KlickStats")} ?`);
 
   /* Focus on input field */
   $input.focus();
@@ -188,11 +214,19 @@
             
             webSocket.onmessage = function(event) {
               const data = JSON.parse(event.data);
+
+              if(data.data.Cached_data){
+                let clicks = data.data.Cached_data.clicks + (data.data.Cached_data.coins_today + data.data.Cached_data.new_coins)*Clicks_Per_Coin;
+                $("#CoinStats").html(`${translate("TextBox.CoinStats")} ${data.data.Cached_data.coins_today + data.data.Cached_data.new_coins}/${maxcoins}`);
+                $("#KlickStats").html(`${translate("TextBox.KlickStats")} ${clicks}`);
+              }
               
               if(data.code === 200){
                 if(data.data.email === localStorage.getItem("email")){
                   isLocked = false;
                   click_timeout = data.data.config.click_timeout;
+                  maxcoins = data.data.config.Max_Coins_Per_Day_Per_User;
+                  Clicks_Per_Coin = data.data.config.Clicks_Per_Coin;
                 }
               } else if(data.code === 400){
                 if(data.message === "Reached_Day_limit"){

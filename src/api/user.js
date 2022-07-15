@@ -31,6 +31,7 @@ router.get("/", limiter, async (reg, res, next) => {
         const users = await GetUsers('email', values.email);
 
         if (users.length === 0) {
+            log.warning(`${PluginName}`, `User ${values.email} not found` + users.length);
             res.status(404).send({
                 error: 'User not found'
             });

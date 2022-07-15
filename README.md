@@ -11,10 +11,10 @@ Max_Coins_Per_Day_Per_User - How many coins the user can get per day.
 click_timeout -  How fast the user can click the button (in ms).  
 
 # Log Level
-LogLevel - The log level of the application. 
-3 = Everything
-2 = Warnings and Errors
-1 = Errors only
+LogLevel - The log level of the application.   
+3 = Everything  
+2 = Warnings and Errors  
+1 = Errors only  
 
 # Setup
 ## PM2

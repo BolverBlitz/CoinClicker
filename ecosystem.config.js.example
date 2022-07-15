@@ -14,6 +14,7 @@ module.exports = {
       "LOG_LEVEL": "3",
       "Clicks_Per_Coin": "1",
       "Max_Coins_Per_Day_Per_User": "100",
+      "click_timeout": "1000",
     },
     script: "./index.js"
   }]

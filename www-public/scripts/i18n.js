@@ -8,7 +8,9 @@ const i18n = new I18n({
             },
             WS:{
                 Connected: 'Mit dem Server verbunden',
-                Error: 'Verbindung zum Server gescheitert',
+                LostConError: 'Verbindung zum Server wurde unterbrochen',
+                UnknownError: 'Unbekannter Fehler mir der Serververbindung...',
+                Reached_Day_limit: 'Du hast heute die maximale Anzahl an Coins erreicht',
             },
             Error: {
                 400: 'Fehlerhafte Anfrage',

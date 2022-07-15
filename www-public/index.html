@@ -30,22 +30,36 @@
         min-height: 100%;
         margin: 0;
         display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+        align-content: center;
         justify-content: center;
         align-items: center;
         background-color: #24282f;
       }
 
-      canvas {
-        position: absolute;
-        pointer-events: none;
-        z-index: 1;
-        top: 0;
-        left: 0;
+      .flexbox-item {
+       flex: 0 1 auto;
       }
 
-      #canvas-number {
-        width: 680px;
-        height: 420px;
+      .flex-item:nth-child(1) {
+          flex-grow: 0;
+          flex-shrink: 1;
+          flex-basis: auto;
+      }
+
+      .flex-item:nth-child(2) {
+          flex-grow: 0;
+          flex-shrink: 1;
+          flex-basis: auto;
+      }
+
+      .flex-item:nth-child(3) {
+          flex-grow: 0;
+          flex-shrink: 1;
+          flex-basis: auto;
       }
 
       /* Button */
@@ -105,7 +119,10 @@
   </head>
 
   <body>
-    <div>
+    <div class="body.flex-item">
+      Stuff
+    </div>
+    <div class="body.flex-item">
       <button id="CoinButton" type="button">
         Coins!<input type="text" id="UserToGiveCoins" placeholder="E-Mail" />
       </button>
@@ -120,11 +137,15 @@
   let doneTypingInterval = 650; //time in ms
   let isLocked = true;
 
+  let click_timeout = 0;
+
   const SnackBox_Timeout = 400;
   const SnackBox_Location = "tr";
 
   const getUrl = window.location;
   const baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
+  let webSocket;
 
   /* Focus on input field */
   $input.focus();
@@ -150,16 +171,15 @@
       success: function (EmailResponse) {
         if (EmailResponse.user) {
           $("#UserToGiveCoins").attr("disabled", "disabled");
-          isLocked = false;
           localStorage.setItem("email", email);
 
-          const webSocket = new WebSocket(`ws://${ getUrl.host}/api/application/websocket?email=${email}`);
+          webSocket = new WebSocket(`ws://${getUrl.host}/api/application/websocket?email=${email}`);
 
             webSocket.onerror = function(event) {
                 SnackBar({
-                    message: `${translate("WS.Error")}`,
+                    message: `${translate("WS.LostConError")}`,
                     width: "300px",
-                    speed: SnackBox_Timeout/2,
+                    speed: SnackBox_Timeout,
                     position: SnackBox_Location,
                     fixed: true,
                     status: "error",
@@ -167,7 +187,34 @@
             };
             
             webSocket.onmessage = function(event) {
-                console.log(event)
+              const data = JSON.parse(event.data);
+              
+              if(data.code === 200){
+                if(data.data.email === localStorage.getItem("email")){
+                  isLocked = false;
+                  click_timeout = data.data.config.click_timeout;
+                }
+              } else if(data.code === 400){
+                if(data.message === "Reached_Day_limit"){
+                  SnackBar({
+                    message: `${translate("WS.Reached_Day_limit")}`,
+                    width: "300px",
+                    speed: SnackBox_Timeout,
+                    position: SnackBox_Location,
+                    fixed: true,
+                    status: "error",
+                });
+                }
+              } else {
+                SnackBar({
+                    message: `${translate("WS.UnknownError")}`,
+                    width: "300px",
+                    speed: SnackBox_Timeout,
+                    position: SnackBox_Location,
+                    fixed: true,
+                    status: "error",
+                });
+              }
             };
 
           SnackBar({
@@ -213,10 +260,15 @@
   MainButton.addEventListener("click", function () {
     if (!isLocked) {
       press();
+      webSocket.send(JSON.stringify({code: 200, message: 'Button was pressed', data: {request: "button_pressed"}}));
       isLocked = true;
+      //Unlock Button after timeout
+      setTimeout(function () {
+        isLocked = false;
+      }, click_timeout);
+      //Reset Button as anomation
       setTimeout(function () {
         unpress();
-        isLocked = false;
       }, 500);
     }
   });

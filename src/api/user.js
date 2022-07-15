@@ -1,6 +1,5 @@
 const express = require('express');
 const rateLimit = require('express-rate-limit');
-const useragent = require('express-useragent');
 const Joi = require('joi');
 const { GetUsers } = require('../../lib/controlpanel_api');
 const { log } = require('../../lib/logger');
@@ -30,8 +29,6 @@ router.get("/", limiter, async (reg, res, next) => {
     try {
         const values = await EmailCheck.validateAsync(reg.query);
         const users = await GetUsers('email', values.email);
-
-        console.log(users);
 
         if (users.length === 0) {
             res.status(404).send({

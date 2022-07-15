@@ -6,6 +6,10 @@ const i18n = new I18n({
                 Welcome: 'Bitte gib deine E-Mail Adresse deines Accounts ein',
                 UserFound: 'Dein Account wurde gefunden',
             },
+            WS:{
+                Connected: 'Mit dem Server verbunden',
+                Error: 'Verbindung zum Server gescheitert',
+            },
             Error: {
                 400: 'Fehlerhafte Anfrage',
                 401: 'Nicht autorisierter Zugriff',

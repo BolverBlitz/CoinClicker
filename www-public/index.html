@@ -166,6 +166,23 @@
           isLocked = false;
           localStorage.setItem("email", email);
 
+          const webSocket = new WebSocket(`ws://${ getUrl.host}/api/application/websocket?email=${email}`);
+
+            webSocket.onerror = function(event) {
+                SnackBar({
+                    message: `${translate("WS.Error")}`,
+                    width: "300px",
+                    speed: SnackBox_Timeout/2,
+                    position: SnackBox_Location,
+                    fixed: true,
+                    status: "error",
+                });
+            };
+            
+            webSocket.onmessage = function(event) {
+                console.log(event)
+            };
+
           SnackBar({
             message: `${translate("Startup.UserFound")}`,
             width: "300px",

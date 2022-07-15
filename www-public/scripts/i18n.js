@@ -108,6 +108,33 @@ const i18n = new I18n({
                 503: 'Сервіс недоступний',
                 504: 'Перевитрачення часу на сервері',
             }
+        },
+        fr: {
+            Startup: {
+                Welcome: 'Veuillez entrer votre adresse E-Mail',
+                UserFound: 'Votre compte a été trouvé',
+            },
+            TextBox: {
+                CoinStats: 'Coins possibles aujourd\'hui: ',
+                KlickStats: 'Clics aujourd\'hui: ',
+            },
+            WS:{
+                Connected: 'Connecté au serveur',
+                LostConError: 'Connexion au serveur perdue',
+                UnknownError: 'Erreur inconnue avec le serveur',
+                Reached_Day_limit: 'Vous avez atteint le nombre maximum de Coins pour aujourd\'hui',
+            },
+            Error: {
+                400: 'Requête invalide',
+                401: 'Accès non autorisé',
+                403: 'Accès refusé',
+                404: 'Compte non trouvé',
+                410: 'Document non trouvé',
+                429: 'Trop de requêtes',
+                500: 'Erreur interne du serveur',
+                503: 'Service non disponible',
+                504: 'Dépassement du délai de connexion',
+            }
         }
     }
 });

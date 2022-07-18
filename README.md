@@ -36,3 +36,7 @@ You can setup the application by running the following commands:
 npm install
 node index.js
 ```
+
+Pictures:
+![grafik](https://user-images.githubusercontent.com/35345288/179521905-70d4c59b-6c68-4045-861e-69f895a4f708.png)
+

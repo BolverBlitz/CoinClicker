@@ -17,6 +17,7 @@ LogLevel - The log level of the application.
 1 = Errors only  
 
 # Setup
+This repo comes with 2 ways to deploy it, you can choose one of them:  
 ## PM2
 First, rename ecosystem.config.js.example to ecosystem.config.js.  
 Then edit the env variables in the file.  

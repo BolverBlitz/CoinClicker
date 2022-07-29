@@ -1,6 +1,6 @@
 {
   "name": "coinclicker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A playground to learn websockets with a loadbalancer",
   "main": "index.js",
   "scripts": {

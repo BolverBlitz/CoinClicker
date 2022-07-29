@@ -199,7 +199,7 @@
           $("#UserToGiveCoins").attr("disabled", "disabled");
           localStorage.setItem("email", email);
 
-          webSocket = new WebSocket(`ws://${getUrl.host}/api/application/websocket?email=${email}`);
+          webSocket = new WebSocket(`wss://${getUrl.host}/api/application/websocket?email=${email}`);
 
             webSocket.onerror = function(event) {
                 SnackBar({

@@ -28,7 +28,7 @@ app.use(expressCspHeader({
         'style-src': [SELF, INLINE],
         'img-src': [SELF, INLINE],
         'worker-src': [NONE],
-        'connect-src': [SELF, INLINE],
+        'connect-src': [SELF],
         'block-all-mixed-content': true
     }
 }));

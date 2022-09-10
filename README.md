@@ -1,6 +1,9 @@
 # CoinClicker
  A playground to learn websockets with a loadbalancer  
 
+# Common Issues
+ If you run the application without https, you will need to modify the websocket url in the frontend from wss to ws in file www-public/index.html.  
+
 # What does it do?
 Users can enter their email adress they use for controlpanel and then click a button to get free coins (Credits).  
 

@@ -20,7 +20,15 @@ LogLevel - The log level of the application.
 1 = Errors only  
 
 # Setup
-This repo comes with 2 ways to deploy it, you can choose one of them:  
+This repo comes with 3 ways to deploy it, you can choose one of them: 
+## Docker
+Edit the .env.example file
+Build the container and then run it.
+```sh
+docker build -t coindocker .
+docker run -p 8080:8000 -d coindocker
+```
+
 ## PM2
 First, rename ecosystem.config.js.example to ecosystem.config.js.  
 Then edit the env variables in the file.  

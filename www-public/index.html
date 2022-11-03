@@ -199,7 +199,13 @@
           $("#UserToGiveCoins").attr("disabled", "disabled");
           localStorage.setItem("email", email);
 
-          webSocket = new WebSocket(`wss://${getUrl.host}/api/application/websocket?email=${email}`);
+          // Should fix the currently mentioned "Common Issue" however it also makes it more likly to be used in a insecure way... i don´t like that
+          let websocket_prefix = "wss";
+          if (location.protocol !== 'https:') {
+            websocket_prefix = "ws";
+          }
+
+          webSocket = new WebSocket(`${websocket_prefix}://${getUrl.host}/api/application/websocket?email=${email}`);
 
             webSocket.onerror = function(event) {
                 SnackBar({

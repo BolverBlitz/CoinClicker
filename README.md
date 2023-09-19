@@ -7,6 +7,10 @@
 # What does it do?
 Users can enter their email adress they use for controlpanel and then click a button to get free coins (Credits).  
 
+# Nginx config
+This supports custom domains with nginx, you can find the configuration example [here](https://github.com/BolverBlitz/CoinClicker/blob/main/nginx.example)
+Change the things in the <> for example the domain and the local ip and the port.
+
 # Settings
 BehindProxy - If you are behind a proxy, you can set it to 1.  
 Clicks_Per_Coin - How often the user needs to click to get a coin.  
